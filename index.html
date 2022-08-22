@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <title>ALBUMS</title>
+</head>
+
+<body>
+
+    <div class="d-flex justify-content-center mt-5">
+      <h1 class="text-monospace" style="font-size: 80px; letter-spacing: 20px;">ALBUMS</h1>
+    </div>
+    <div class="d-flex flex-column justify-content-center m-5">
+      <button class="btn1 btn btn-secondary">DAFT PUNK</button>
+    </div>
+    <div class="d-flex flex-column justify-content-center m-5">
+      <button class="btn2 btn btn-secondary">METALICA</button>
+    </div>
+    <div class="d-flex flex-column justify-content-center m-5">
+      <button class="btn3 btn btn-secondary">PINK FLOYD</button>
+    </div>
+   
+    <div class="container">
+        <div class="row">
+            <!-- albums -->
+        </div>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+
+  <script>
+
+  //DAFT PUNK
+
+  const loadAlbum = () => {
+  const options = { method: 'GET', headers: 
+                  { 'X-RapidAPI-Key': '72d74d5742msh671ddd3c5e94affp104bd1jsn0efe2b07cb3c',
+		                'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'}
+                  };
+
+        fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=daft%20punk', options)
+            .then(response => response.json())
+            .then(songList => {console.log(songList)
+
+                const grid = document.querySelector(".container > .row")
+
+                for (let i = 0; i < songList.data.length; i++) {
+                     const song = songList.data[i]
+
+                     const col = document.createElement("div")
+                     col.className = "col-sm-6 col-md-4 col-lg-3"
+
+                     col.innerHTML = `
+                                        <div class="card">
+                                          <img src=${song.album.cover} class="card-img-top" alt=${song.album.title}>
+                                          <div class="card-body">
+                                              <h5 class="card-title text-truncate" style="max-width: 200px;">${song.album.title}</h5>
+                                              <p class="card-text font-weight-lighter text-truncate" style="max-width: 200px;">${song.title}</p>
+                                              <p class="card-text font-weight-lighter text-right p-2">${song.duration}min</p>
+                                          </div>
+                                        </div>
+                                     `
+
+                grid.appendChild(col)
+                }
+            })
+            .catch(err => console.error("ERROR", err));
+  }   
+
+  //METALICA
+
+  const loadAlbum2 = () => {
+  const options2 = { method: 'GET', headers: 
+                  { 'X-RapidAPI-Key': '72d74d5742msh671ddd3c5e94affp104bd1jsn0efe2b07cb3c',
+		                'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'}
+                  };
+
+        fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=metallica', options2)
+             .then(response => response.json())
+             .then(musicAlbum => {console.log(musicAlbum)
+
+                 const grid = document.querySelector(".container > .row")
+
+                 for (let i = 0; i < musicAlbum.data.length; i++) {
+                      const musicAlb = musicAlbum.data[i]
+
+                      const col = document.createElement("div")
+                      col.className = "col-sm-6 col-md-4 col-lg-3"
+
+                      col.innerHTML = `
+                                        <div class="card">
+                                          <img src=${musicAlb.album.cover} class="card-img-top" alt=${musicAlb.album.title}>
+                                          <div class="card-body">
+                                              <h5 class="card-title text-truncate" style="max-width: 200px;">${musicAlb.album.title}</h5>
+                                              <p class="card-text font-weight-lighter text-truncate" style="max-width: 200px;">${musicAlb.title}</p>
+                                              <p class="card-text font-weight-lighter text-right p-2">${musicAlb.duration}min</p>
+                                          </div>
+                                        </div>
+                                      `
+
+                  grid.appendChild(col)
+                  }
+             })
+             .catch(err => console.log(err))
+  }          
+  
+  //PINK FLOYD
+  
+  const loadAlbum3 = () => {
+  const options3 = { method: 'GET', headers: 
+                   { 'X-RapidAPI-Key': '72d74d5742msh671ddd3c5e94affp104bd1jsn0efe2b07cb3c',
+                     'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'}
+                   };
+
+        fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=pink%20floyd', options3)
+             .then(response1 => response1.json())
+             .then(musicList => {console.log(musicList)
+
+                const grid = document.querySelector(".container > .row")
+
+                for (let i = 0; i < musicList.data.length; i++) {
+                     const music = musicList.data[i]
+
+                     const col = document.createElement("div")
+                     col.className = "col-sm-6 col-md-4 col-lg-3"
+
+                     col.innerHTML = `
+                                    
+                                      <div class="card">
+                                          <img src=${music.album.cover} class="card-img-top" alt=${music.album.title}>
+                                          <div class="card-body">
+                                              <h5 class="card-title text-truncate" style="max-width: 200px;">${music.album.title}</h5>
+                                              <p class="card-text font-weight-lighter text-truncate" style="max-width: 200px;">${music.title}</p>
+                                              <p class="card-text font-weight-lighter text-right p-2">${music.duration}min</p>
+                                          </div>
+                                      </div>
+                                    
+                                     `
+
+                grid.appendChild(col)
+                }
+             })
+             .catch(err => console.log(err))
+  }    
+
+  window.onload = () => {
+       const btn3 = document.querySelector(".btn3")
+       btn3.addEventListener("click", loadAlbum3)
+       const btn2 = document.querySelector(".btn2")
+       btn2.addEventListener("click", loadAlbum2)
+       const btn1 = document.querySelector(".btn1")
+       btn1.addEventListener("click", loadAlbum)
+  }
+  
+  
+
+  </script>
+</body>
+
+</html>
+
+</html>
